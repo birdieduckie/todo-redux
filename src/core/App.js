@@ -1,10 +1,13 @@
 import React from 'react';
-import { Control, List } from '../components'
+import { connect } from 'react-redux'
+import { Control, List } from '../components';
 
 import './App.css';
+import { taskDelete } from '../store/main/main.actions';
 
 class App extends React.Component {
   state = {
+    tasks: [],
     filteredTasks: [],
     filterType: 'all',
     isFiltered: false
@@ -27,14 +30,6 @@ class App extends React.Component {
 
       this.setState({ tasks: [...tasks, newTask] }, () => localStorage.setItem('tasks', JSON.stringify(this.state.tasks)))
     }
-  }
-
-  deleteTask = (id) => {
-    const { tasks } = this.state
-
-    const updatedTasks = tasks.filter((task) => task.id !== id)
-
-    this.setState({ tasks: updatedTasks }, () => localStorage.setItem('tasks', JSON.stringify(this.state.tasks)))
   }
 
   completeTask = (id, isCompleted) => {
@@ -79,9 +74,5 @@ class App extends React.Component {
   }
 }
 
-// App (общий родитель)
-// Control (инпут, кнопка добавить)
-// List (список тасок)
-// Task (таска, название ее, чекбокс, кнопка удалить)
 
-export { App };
+export const ConnectedApp = connect(store => ({ tasks: store.main.tasks }), dispatch => ({ dispatch }))(App)

@@ -10,9 +10,8 @@ class Task extends React.Component {
   }
 
   handleDelete = () => {
-    const { id, deleteTask } = this.props
+    const { id } = this.props
 
-    deleteTask(id)
   }
 
   handleChangeStatus = () => {

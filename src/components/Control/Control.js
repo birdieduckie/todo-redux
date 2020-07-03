@@ -18,9 +18,7 @@ class Control extends React.Component {
   }
 
   handleClick = () => {
-    const { addTask, dispatch } = this.props
-
-    addTask(this.state.inputValue)
+    const { dispatch } = this.props
 
     this.setState({ inputValue: '' })
 
