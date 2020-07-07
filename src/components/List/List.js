@@ -1,7 +1,8 @@
 import React from 'react';
-import { ConnectedTask as Task } from '../Task/Task'
-
+import { connect } from 'react-redux';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
+
+import { ConnectedTask as Task } from '../Task/Task'
 
 import './List.css';
 
@@ -24,7 +25,7 @@ class List extends React.Component {
                 completeTask={completeTask}
               />
             </ListGroupItem>
-           )
+          )
         }
         {currentTasks.length === 0 && 'Тасок пока нет!'}
       </ListGroup>
@@ -32,4 +33,4 @@ class List extends React.Component {
   }
 }
 
-export { List };
+export const ConnectedList = connect(store => ({ tasks: store.main.tasks }), null)(List)

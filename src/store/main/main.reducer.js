@@ -16,11 +16,20 @@ const handleTaskAdd = (state, action) => {
 }
 
 const handleTaskDelete = (state, action) => {
-  const updatedTasks = state.tasks.filter((task) => task.id !== action.id)
+  const updatedTasks = state.tasks.filter(task => task.id !== action.id)
 
   return { ...state, tasks: updatedTasks }
 }
 
+const handleTaskToggle = (state, action) => {
+  const updatedTasks = state.tasks.map(task =>
+    task.id === action.payload.id
+      ? ({ ...task, isCompleted: action.payload.isCompleted })
+      : task
+  )
+
+  return { ...state, tasks: updatedTasks }
+}
 
 export const mainReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -31,7 +40,7 @@ export const mainReducer = (state = initialState, action) => {
       return handleTaskDelete(state, action)
 
     case TASK_TOGGLE:
-      return state
+      return handleTaskToggle(state, action)
     
     case SET_FILTER:
       return { ...state, filter: action.filter }
@@ -40,3 +49,5 @@ export const mainReducer = (state = initialState, action) => {
       return state
   }
 }
+
+// фильтры + новые действия для локал сторадж + 

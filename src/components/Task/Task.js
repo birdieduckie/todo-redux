@@ -1,8 +1,7 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
 
-import { taskDelete } from '../../store/main/main.actions'
+import { taskDelete, taskToggle } from '../../store/main/main.actions'
 
 import { Button } from 'react-bootstrap';
 
@@ -14,16 +13,16 @@ class Task extends React.Component {
   }
 
   handleDelete = () => {
-    const { dispatch } = this.props
+    const { id, dispatch } = this.props
 
-    dispatch(taskDelete(1))
+    dispatch(taskDelete(id))
   }
 
   handleChangeStatus = () => {
-    const { id, completeTask } = this.props
+    const { id, dispatch } = this.props
 
     this.setState((prevState) =>
-     ({ isCheckboxChecked: !prevState.isCheckboxChecked }), () => completeTask(id, this.state.isCheckboxChecked))
+     ({ isCheckboxChecked: !prevState.isCheckboxChecked }), () => dispatch(taskToggle(id, this.state.isCheckboxChecked)))
   }
 
   render() {
@@ -31,15 +30,13 @@ class Task extends React.Component {
     const { content } = this.props
     
     return (
-      <Task>
-        <div className='task'>
-          <input type='checkbox' checked={isCheckboxChecked} onChange={this.handleChangeStatus} />
-          <div>
-            {content}
-          </div>
-          <Button variant='danger' onClick={this.handleDelete}>X</Button>
+      <div className='task'>
+        <input type='checkbox' checked={isCheckboxChecked} onChange={this.handleChangeStatus} />
+        <div>
+          {content}
         </div>
-      </Task>
+        <Button variant='danger' onClick={this.handleDelete}>X</Button>
+      </div>
     )
   }
 }

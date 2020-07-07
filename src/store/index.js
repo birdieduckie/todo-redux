@@ -13,11 +13,5 @@ export const configureStore = initialState => {
     composeEnhancers(middlewareEnhancer)
   )
 
-  if (module.hot) {
-    module.hot.accept('./root.reducer', () =>
-      store.replaceReducer(rootReducer)
-    )
-  }
-
   return store
 }

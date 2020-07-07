@@ -1,9 +1,6 @@
-export const TASK_ADD = 'TASK_ADD';
-
-export const TASK_DELETE = 'TASK_DELETE';
-
+export const TASK_ADD = 'TASK_ADD'
+export const TASK_DELETE = 'TASK_DELETE'
 export const TASK_TOGGLE = 'TASK_TOGGLE'
-
 export const SET_FILTER = 'SET_FILTER'
 
 export const taskAdd = content => ({
@@ -16,9 +13,9 @@ export const taskDelete = id => ({
   id
 })
 
-export const taskToggle = id => ({
+export const taskToggle = (id, isCompleted) => ({
   type: TASK_TOGGLE,
-  id
+  payload: { id, isCompleted }
 })
 
 export const setFilter = filter => ({
@@ -30,5 +27,5 @@ export const setFilter = filter => ({
 export const filters = {
   SHOW_ALL: 'SHOW_ALL',
   SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_INCOMPLETED: 'SHOW_ACTIVE'
+  SHOW_INCOMPLETED: 'SHOW_INCOMPLETED'
 }

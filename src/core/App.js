@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux'
 
 import { Control, List } from '../components';
 
@@ -56,7 +55,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { tasks, filteredTasks, isFiltered } = this.state
+    const { filteredTasks, isFiltered } = this.state
 
     return (
       <div className="App">
@@ -65,7 +64,6 @@ class App extends React.Component {
           isFiltered={isFiltered}
           deleteTask={this.deleteTask}
           completeTask={this.completeTask}
-          tasks={tasks}
           filteredTasks={filteredTasks}
         />
       </div>
@@ -73,5 +71,4 @@ class App extends React.Component {
   }
 }
 
-
-export const ConnectedApp = connect(store => ({ tasks: store.main.tasks }), dispatch => ({ dispatch }))(App)
+export { App }
