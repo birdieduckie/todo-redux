@@ -54,4 +54,5 @@ class Control extends React.Component {
   }
 }
 
-export const ConnectedControl = connect(null, dispatch => ({ dispatch }))(Control);
+
+export const ConnectedControl = connect(null, dispatch => ({ dispatch }))(Control)

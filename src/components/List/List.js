@@ -1,5 +1,5 @@
 import React from 'react';
-import { Task } from '../Task/Task'
+import { ConnectedTask as Task } from '../Task/Task'
 
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
@@ -15,9 +15,8 @@ class List extends React.Component {
       <ListGroup>
         {currentTasks.length > 0 &&
           currentTasks.map(task => 
-            <ListGroupItem>
+            <ListGroupItem key={task.id}>
               <Task 
-                key={task.id} 
                 id={task.id} 
                 content={task.content} 
                 isCompleted={task.isCompleted} 

@@ -5,6 +5,16 @@ const initialState = {
   filter: filters.SHOW_ALL
 }
 
+const handleTaskAdd = (state, action) => {
+  if (action.content) {
+    const newTask = { id: +new Date(), content: action.content, isCompleted: false }
+
+    return { ...state, tasks: [...state.tasks, newTask] }
+  }
+
+  return state
+}
+
 const handleTaskDelete = (state, action) => {
   const updatedTasks = state.tasks.filter((task) => task.id !== action.id)
 
@@ -15,7 +25,7 @@ const handleTaskDelete = (state, action) => {
 export const mainReducer = (state = initialState, action) => {
   switch (action.type) {
     case TASK_ADD:
-      return { ...state, zhopa: action.content }
+      return handleTaskAdd(state, action)
 
     case TASK_DELETE:
       return handleTaskDelete(state, action)
@@ -24,7 +34,7 @@ export const mainReducer = (state = initialState, action) => {
       return state
     
     case SET_FILTER:
-      return { ...state, filter: action.filter}
+      return { ...state, filter: action.filter }
 
     default:
       return state

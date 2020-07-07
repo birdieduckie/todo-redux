@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
+
 import { Control, List } from '../components';
 
 import './App.css';
-import { taskDelete } from '../store/main/main.actions';
 
 class App extends React.Component {
   state = {
@@ -21,9 +21,8 @@ class App extends React.Component {
     }
   }
 
-
   addTask = (data) => {
-    const { tasks } = this.state
+    const { tasks } = this.props
     
     if (data) {
       const newTask = { id: +new Date(), content: data, isCompleted: false }
