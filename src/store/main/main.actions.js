@@ -1,7 +1,7 @@
 export const TASK_ADD = 'TASK_ADD'
 export const TASK_DELETE = 'TASK_DELETE'
 export const TASK_TOGGLE = 'TASK_TOGGLE'
-export const SET_FILTER = 'SET_FILTER'
+export const FILTERTYPE_SWITCH = 'FILTERTYPE_SWITCH'
 
 export const taskAdd = content => ({
   type: TASK_ADD,
@@ -19,13 +19,6 @@ export const taskToggle = (id, isCompleted) => ({
 })
 
 export const setFilter = filter => ({
-  type: 'SET_FILTER',
+  type: FILTERTYPE_SWITCH,
   filter
 })
-
-
-export const filters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_INCOMPLETED: 'SHOW_INCOMPLETED'
-}

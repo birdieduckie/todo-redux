@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 
 import { Button } from 'react-bootstrap';
 
-import { taskAdd } from '../../store/main/main.actions'
+import { taskAdd, setFilter } from '../../store/main/main.actions'
 
 import './Control.css';
 
 class Control extends React.Component {
   state = {
-    inputValue: '',
-    selectedValue: 'all'
+    inputValue: ''
   }
 
   handleChange = e => {
@@ -32,9 +31,9 @@ class Control extends React.Component {
   }
 
   handleFilterChange = e => {
-    const { setFilter } = this.props
+    const { dispatch } = this.props
 
-    this.setState({ selectedValue: e.target.value }, () => setFilter(this.state.selectedValue))
+    dispatch(setFilter(e.target.value))
   }
 
   render() {

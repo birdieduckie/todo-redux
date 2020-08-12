@@ -7,10 +7,33 @@ import { ConnectedTask as Task } from '../Task/Task'
 import './List.css';
 
 class List extends React.Component {
-  render() {
-    const { tasks, deleteTask, completeTask, filteredTasks, isFiltered } = this.props
+  state = {
+    filteredTasks: []
+  }
 
-    const currentTasks = isFiltered ? filteredTasks : tasks
+  componentDidUpdate(prevProps) {
+    const { tasks } = this.props
+
+    if (this.props.filterType !== prevProps.filterType) {
+      if (this.props.filterType === 'success') {
+        const updatedTasks = tasks.filter(task => task.isCompleted)
+
+        return this.setState({ filteredTasks: updatedTasks })
+      }
+      
+      if (this.props.filterType === 'unsuccess') {
+        const updatedTasks = tasks.filter(task => !task.isCompleted)
+
+        return this.setState({ filteredTasks: updatedTasks })
+      }
+    }
+  }
+
+  render() {
+    const { filteredTasks } = this.state
+    const { tasks, filterType } = this.props
+
+    const currentTasks = filterType === 'all' ? tasks : filteredTasks
 
     return (
       <ListGroup>
@@ -19,10 +42,8 @@ class List extends React.Component {
             <ListGroupItem key={task.id}>
               <Task 
                 id={task.id} 
-                content={task.content} 
+                content={task.content}  
                 isCompleted={task.isCompleted} 
-                deleteTask={deleteTask} 
-                completeTask={completeTask}
               />
             </ListGroupItem>
           )
@@ -33,4 +54,4 @@ class List extends React.Component {
   }
 }
 
-export const ConnectedList = connect(store => ({ tasks: store.main.tasks }), null)(List)
+export const ConnectedList = connect(store => ({ tasks: store.main.tasks, filterType: store.main.filterType }), null)(List)
